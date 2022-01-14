@@ -39,7 +39,7 @@ module Mapbox
 
       return request(
         :get,
-        "/geocoding/v5/#{dataset}/#{URI.escape(query)}.json#{params}",
+        "/geocoding/v5/#{dataset}/#{CGI.escape(query)}.json#{params}",
         nil)
     end
 
