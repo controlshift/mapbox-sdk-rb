@@ -1,6 +1,8 @@
 require 'rest-client'
 require 'json'
+require 'cgi'
 require 'uri'
+
 
 module Mapbox
   class Tokens
@@ -21,7 +23,7 @@ module Mapbox
       
       return request(
         :get,
-        "/tokens/v2/#{URI.escape(username)}#{params}",
+        "/tokens/v2/#{CGI.escape(username)}#{params}",
         nil)
     end
 
@@ -40,14 +42,14 @@ module Mapbox
 
       return request(
         :post,
-        "/tokens/v2/#{URI.escape(username)}",
+        "/tokens/v2/#{CGI.escape(username)}",
         params)
     end
 
     def self.delete_token(username, token_id)
       return request(
         :delete,
-        "/tokens/v2/#{URI.escape(username)}/#{URI.escape(token_id)}")
+        "/tokens/v2/#{CGI.escape(username)}/#{CGI.escape(token_id)}")
     end
 
     def self.update_token(username, token_id, note, scopes, allowedUrls=[])
@@ -58,14 +60,14 @@ module Mapbox
 
       return request(
         :patch,
-        "/tokens/v2/#{URI.escape(username)}/#{URI.escape(token_id)}",
+        "/tokens/v2/#{CGI.escape(username)}/#{CGI.escape(token_id)}",
         params)
     end
 
     def self.list_scopes(username)
       return request(
         :get,
-        "/scopes/v1/#{URI.escape(username)}",
+        "/scopes/v1/#{CGI.escape(username)}",
         nil)
     end
   end
